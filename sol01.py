@@ -78,19 +78,25 @@ def draw_pixel(x, y):
 # Function to initiate the drawing of pixels
 def draw_pixels():
     global current_x, current_y
+    global sol_x, sol_y
     deltas = next_pixel()
     if deltas != None:
         delta_x, delta_y = deltas
         current_x += pixel_size * delta_x
         current_y += pixel_size * delta_y
+        sol_x += delta_x
+        sol_y += delta_y
         draw_pixel(current_x, current_y)
-        root.after(10, draw_pixels)
+        root.after(5, draw_pixels)
     else:
         print("Finished drawing.")
+        print("x = " + str(sol_x) + ", y = " + str(sol_y))
 
 # Initialize starting coordinates
 current_x = canvas_width // 4
 current_y = canvas_height // 2
+sol_x = 0
+sol_y = 0
 current_dir=get_dir('N', commands[0][0:1])
 # Start the drawing process
 draw_pixels()
